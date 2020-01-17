@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     static Font titleFont2;
     int currentState = MENU;
     Timer frameDraw;
+    Rocketship rocket = new Rocketship(LeagueInvaders.WIDTH/2, LeagueInvaders.HEIGHT-75, 50, 50);
     
     //constructor
     public GamePanel() {
@@ -32,20 +33,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     
     
     //Methods for updating the game in each state
-    public static void updateMenuState() {
+    public void updateMenuState() {
     	
     }
     
-    public static void updateGameState() {
+    public void updateGameState() {
     	
     }
     
-    public static void updateEndState() {
+    public void updateEndState() {
     	
     }
     
     //Methods for drawing the game in each state
-    public static void drawMenuState(Graphics g) {
+    public void drawMenuState(Graphics g) {
     	g.setColor(Color.BLUE);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
     	
@@ -57,12 +58,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
     	g.drawString("Press SPACE for instructions", 120, 700);
     }
     
-    public static void drawGameState(Graphics g) {
+    public void drawGameState(Graphics g) {
     	g.setColor(Color.BLACK);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+    	rocket.draw(g);
     }
     
-    public static void drawEndState(Graphics g) {
+    public void drawEndState(Graphics g) {
     	g.setColor(Color.RED);
     	g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
     	
@@ -118,24 +120,46 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (currentState == END) {
-	        currentState = MENU;
-	    } else {
-	        currentState++;
-	    }
+		
+		
+		
+		
+		
 		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
+		    if(rocket.y > 0) {
+		    	rocket.up();
+		    }
 		}
-		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+		else if(e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
+		    if(rocket.y < LeagueInvaders.HEIGHT-rocket.height-25) {
+		    	rocket.down();
+		    }
 		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		else if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
+		    if(rocket.x < LeagueInvaders.WIDTH-rocket.width) {
+		    	rocket.right();
+		    }
 		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+		else if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 		    System.out.println("LEFT");
+		    if(rocket.x > 0) {
+		    	rocket.left();
+		    }
 		}
+		
+		else if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+
+			if (currentState == END) {
+		        currentState = MENU;
+		    } else {
+		        currentState++;
+		    }
+		}
+		
 	}
 
 
