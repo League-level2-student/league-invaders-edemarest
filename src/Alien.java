@@ -32,8 +32,6 @@ public class Alien extends GameObject{
 	    		g.setColor(Color.BLUE);
 	    		g.fillRect(x, y, width, height);
 	    	}
-	      g.setColor(Color.BLUE);
-	      g.drawRect(x, y, width, height);
 	}
 	
 	
